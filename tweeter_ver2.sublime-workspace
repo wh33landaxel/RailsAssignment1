@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"status",
+				"statuses"
+			],
+			[
+				"stat",
+				"statuses"
+			],
+			[
+				"fol",
+				"follower"
+			],
+			[
+				"follo",
+				"followee"
+			],
+			[
+				"user",
+				"user"
+			],
+			[
+				"us",
+				"user_id"
+			],
+			[
 				"val",
 				"valid_my_date_variable"
 			]
@@ -12,10 +36,24 @@
 	"buffers":
 	[
 		{
+			"contents": "class User < ActiveRecord::Base\nattr_accessible :email, :name\n\nvalidates_uniqueness_of :name\nvalidates :name,:presence => true\nvalidates_format_of :email, :with => /@/, :message => 'email needs @'\nhas_many :statuses\nhas_many :followers\n\n\ndef count_statuses(id)\n	Status.where(:user_id => :id).count\nend \n\ndef avg_count(id)\n	Status.where(:user_id => :id).average\nend\n\ndef most_popular\n	Follow.where(:followers => :name).count.maximum\nend\n",
 			"file": "app/models/user.rb",
+			"file_size": 463,
+			"file_write_time": 1364687374000000,
 			"settings":
 			{
-				"buffer_size": 206,
+				"buffer_size": 436,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "",
+			"file": "db/migrate/20130328183957_create_status_connections.rb",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -23,15 +61,15 @@
 			"file": "app/models/status.rb",
 			"settings":
 			{
-				"buffer_size": 198,
+				"buffer_size": 410,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/models/tag.rb",
+			"file": "test/unit/user_test.rb",
 			"settings":
 			{
-				"buffer_size": 94,
+				"buffer_size": 113,
 				"line_ending": "Unix"
 			}
 		},
@@ -39,7 +77,34 @@
 			"file": "app/models/follow.rb",
 			"settings":
 			{
-				"buffer_size": 77,
+				"buffer_size": 218,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "# encoding: UTF-8\n# This file is auto-generated from the current state of the database. Instead\n# of editing this file, please use the migrations feature of Active Record to\n# incrementally modify your database, and then regenerate this schema definition.\n#\n# Note that this schema.rb definition is the authoritative source for your\n# database schema. If you need to create the application database on another\n# system, you should be using db:schema:load, not running all the migrations\n# from scratch. The latter is a flawed and unsustainable approach (the more migrations\n# you'll amass, the slower it'll run and the greater likelihood for issues).\n#\n# It's strongly recommended to check this file into your version control system.\n\nActiveRecord::Schema.define(:version => 20130328182538) do\n\n  create_table \"follows\", :force => true do |t|\n    t.string   \"follower\"\n    t.string   \"followee\"\n    t.datetime \"created_at\", :null => false\n    t.datetime \"updated_at\", :null => false\n  end\n\n  create_table \"statuses\", :force => true do |t|\n    t.string   \"status\"\n    t.string   \"geocode\"\n    t.string   \"image_url\"\n    t.datetime \"created_at\", :null => false\n    t.datetime \"updated_at\", :null => false\n    t.integer  \"user_id\"\n  end\n\n  create_table \"tags\", :force => true do |t|\n    t.string   \"tag\"\n    t.datetime \"created_at\", :null => false\n    t.datetime \"updated_at\", :null => false\n    t.integer  \"status_id\"\n  end\n\n  create_table \"users\", :force => true do |t|\n    t.string   \"name\"\n    t.string   \"email\"\n    t.datetime \"created_at\", :null => false\n    t.datetime \"updated_at\", :null => false\n  end\n\nend\n",
+			"file": "db/schema.rb",
+			"file_size": 1827,
+			"file_write_time": 1364839996000000,
+			"settings":
+			{
+				"buffer_size": 1613,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/models/status_connection.rb",
+			"settings":
+			{
+				"buffer_size": 93,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "db/migrate/20130401181243_create_status_connections.rb",
+			"settings":
+			{
+				"buffer_size": 209,
 				"line_ending": "Unix"
 			}
 		}
@@ -68,6 +133,14 @@
 	},
 	"file_history":
 	[
+		"/Users/xlnunez317/tweeter_ver2/app/models/status_connections.rb",
+		"/Users/xlnunez317/tweeter_ver2/app/models/status.rb",
+		"/Users/xlnunez317/tweeter_ver2/app/models/tag.rb",
+		"/Users/xlnunez317/tweeter_ver2/app/models/follow.rb",
+		"/Users/xlnunez317/tweeter_ver2/db/migrate/20130322161443_add_status_id_to_tags.rb",
+		"/Users/xlnunez317/tweeter_ver2/db/migrate/20130328183957_create_status_connections.rb",
+		"/Users/xlnunez317/tweeter_ver2/db/migrate/20130315190352_create_statuses.rb",
+		"/Users/xlnunez317/tweeter_ver2/db/migrate/20130315174919_create_users.rb",
 		"/Users/xlnunez317/blog/app/helpers/posts_helper.rb",
 		"/Users/xlnunez317/blog/app/views/tags/_form.html.erb",
 		"/Users/xlnunez317/blog/app/views/posts/_form.html.erb",
@@ -123,15 +196,15 @@
 					"file": "app/models/user.rb",
 					"settings":
 					{
-						"buffer_size": 206,
+						"buffer_size": 436,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								198,
-								198
+								436,
+								436
 							]
 						],
 						"settings":
@@ -146,18 +219,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "app/models/status.rb",
+					"file": "db/migrate/20130328183957_create_status_connections.rb",
 					"settings":
 					{
-						"buffer_size": 198,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								193,
-								193
+								0,
+								0
 							]
 						],
 						"settings":
@@ -172,18 +245,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "app/models/tag.rb",
+					"file": "app/models/status.rb",
 					"settings":
 					{
-						"buffer_size": 94,
+						"buffer_size": 410,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								89,
-								89
+								34,
+								92
 							]
 						],
 						"settings":
@@ -198,18 +271,124 @@
 				},
 				{
 					"buffer": 3,
-					"file": "app/models/follow.rb",
+					"file": "test/unit/user_test.rb",
 					"settings":
 					{
-						"buffer_size": 77,
+						"buffer_size": 113,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								72,
-								72
+								113,
+								113
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/models/follow.rb",
+					"settings":
+					{
+						"buffer_size": 218,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								36,
+								36
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "db/schema.rb",
+					"settings":
+					{
+						"buffer_size": 1613,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/models/status_connection.rb",
+					"settings":
+					{
+						"buffer_size": 93,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "db/migrate/20130401181243_create_status_connections.rb",
+					"settings":
+					{
+						"buffer_size": 209,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								172,
+								172
 							]
 						],
 						"settings":

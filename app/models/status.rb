@@ -3,9 +3,10 @@ class Status < ActiveRecord::Base
 
     validates :status,:presence => true
 	validates_format_of :image_url, :with => URI::regexp(%w(http https))
-    belongs_to :user
-    has_many :statuses, :class_name => "Status",
-    :foreign_key => "status"
-    belongs_to :statuses, :class_name => "Status"
-
+	belongs_to :user
+	#rails generate migrate 
+	has_and_belongs_to_many(:statuses,
+    :join_table => "status_connections",
+    :foreign_key => "status_a_id",
+    :association_foreign_key => "status_b_id")
 end

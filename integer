@@ -1,0 +1,7 @@
+[1m[37m      invoke[0m  active_record
+[1m[32m      create[0m    db/migrate/20130401181053_create_status_connections.rb
+[1m[32m      create[0m    app/models/status_connection.rb
+[1m[37m      invoke[0m    test_unit
+[1m[32m      create[0m      test/unit/status_connection_test.rb
+[1m[31m    conflict[0m      test/fixtures/status_connections.yml
+    Overwrite /Users/xlnunez317/tweeter_ver2/test/fixtures/status_connections.yml? (enter "h" for help) [Ynaqdh] 

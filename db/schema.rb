@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322161443) do
+ActiveRecord::Schema.define(:version => 20130328182538) do
 
   create_table "follows", :force => true do |t|
     t.string   "follower"
